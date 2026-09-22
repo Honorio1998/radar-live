@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radar Live</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b1020;
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .card {
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 25px;
+      background: #151d38;
+      border-radius: 15px;
+    }
+
+    .online {
+      color: #20d486;
+      font-size: 24px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>⚡ RADAR LIVE</h1>
+    <p class="online">🟢 SISTEMA ONLINE</p>
+    <p>Servidor conectado.</p>
+    <p id="status">Verificando...</p>
+  </div>
+
+  <script>
+    fetch("/api/status")
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("status").textContent =
+          data.mensagem || "Radar funcionando";
+      })
+      .catch(() => {
+        document.getElementById("status").textContent =
+          "Erro de conexão";
+      });
+  </script>
+</body>
+</html>
